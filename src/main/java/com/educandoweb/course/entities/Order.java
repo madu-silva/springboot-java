@@ -45,7 +45,6 @@ public class Order implements Serializable {
 	private Payment payment;
 	
 	public Order() {
-
 	}
 
 	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
@@ -93,13 +92,20 @@ public class Order implements Serializable {
 	public Payment getPayment() {
 		return payment;
 	}
-
+	
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
 	
 	public Set<OrderItem> getItem(){
 		return items;
+	}
+	public Double getTotal() {
+		double sum = 0.0;
+		for (OrderItem x : items) {
+			sum += x.getSubTotal();
+		}
+		return sum;
 	}
 	
 	@Override
